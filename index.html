@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Davetiye Videosu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+      background-color: #f4f4f4;
+    }
+
+    #hidden-link {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .button {
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    iframe {
+      max-width: 100%;
+      height: 360px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎥 Davet Videosu</h2>
+  <iframe src="https://www.youtube.com/watch?v=iG-IkhRTg1o" 
+          frameborder="0"
+          allow="autoplay; encrypted-media" 
+          allowfullscreen>
+  </iframe>
+
+  <div id="hidden-link">
+    <a href="https://example.com" class="button" target="_blank">Partiye Katıl!</a>
+  </div>
+
+  <script>
+    // 2 dakika (120000 ms) sonra linki göster
+    setTimeout(() => {
+      document.getElementById('hidden-link').style.display = 'block';
+    }, 120000);
+  </script>
+</body>
+</html>
