@@ -2,24 +2,52 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <title>Davetiye Videosu</title>
+  <title>Davet Videosu</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding-top: 50px;
-      background-color: #f0f0f0;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: black;
+      overflow: hidden;
+    }
+
+    #start-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background-color: #000;
+      flex-direction: column;
+      color: white;
+    }
+
+    #video-container {
+      display: none;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #player {
+      width: 100%;
+      height: 100%;
     }
 
     #hidden-link {
       display: none;
-      margin-top: 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
     }
 
     .button {
-      padding: 12px 24px;
-      font-size: 18px;
-      background-color: #4CAF50;
+      padding: 16px 32px;
+      font-size: 20px;
+      background-color: #28a745;
       color: white;
       border: none;
       border-radius: 8px;
@@ -27,55 +55,59 @@
     }
 
     .button:hover {
-      background-color: #45a049;
-    }
-
-    #player {
-      margin: auto;
-      width: 100%;
-      max-width: 640px;
-      height: 360px;
+      background-color: #218838;
     }
   </style>
 </head>
 <body>
 
-  <h2>🎥 Davet Videosu</h2>
-  <div id="player"></div>
+  <div id="start-screen">
+    <h1>🎉 Hoş Geldin!</h1>
+    <p>Parti videosunu izlemek için tıkla:</p>
+    <button class="button" onclick="startVideo()">Başlat</button>
+  </div>
+
+  <div id="video-container">
+    <div id="player"></div>
+  </div>
 
   <div id="hidden-link">
     <a href="https://example.com" class="button" target="_blank">Partiye Katıl!</a>
   </div>
 
-  <!-- YouTube API -->
+  <!-- YouTube IFrame API -->
   <script src="https://www.youtube.com/iframe_api"></script>
 
   <script>
     let player;
-    let countdownStarted = false;
 
-    function onYouTubeIframeAPIReady() {
+    function startVideo() {
+      document.getElementById('start-screen').style.display = 'none';
+      document.getElementById('video-container').style.display = 'block';
+
       player = new YT.Player('player', {
-        height: '360',
-        width: '640',
-        videoId: 'WGRuxlH-X9w', // Buraya video ID'ni yaz
+        videoId: 'WGRuxlH-X9w',
         playerVars: {
-          'autoplay': 1,
-          'mute': 1,
+          autoplay: 1,
+          mute: 0,
+          controls: 0,
+          rel: 0,
+          showinfo: 0
         },
         events: {
-          'onStateChange': onPlayerStateChange
+          onReady: (event) => event.target.playVideo(),
+          onStateChange: onPlayerStateChange
         }
       });
     }
 
+    function onYouTubeIframeAPIReady() {
+      // gerekli ama boş bırakılıyor
+    }
+
     function onPlayerStateChange(event) {
-      if (event.data === YT.PlayerState.PLAYING && !countdownStarted) {
-        countdownStarted = true;
-        // Video oynatılmaya başladıktan sonra 30 saniye bekle
-        setTimeout(() => {
-          document.getElementById('hidden-link').style.display = 'block';
-        }, 30000); // 30 saniye = 30000 ms
+      if (event.data === YT.PlayerState.ENDED) {
+        document.getElementById('hidden-link').style.display = 'block';
       }
     }
   </script>
