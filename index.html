@@ -2,14 +2,13 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Davetiye Videosu</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       padding-top: 50px;
-      background-color: #f4f4f4;
+      background-color: #f0f0f0;
     }
 
     #hidden-link {
@@ -31,29 +30,55 @@
       background-color: #45a049;
     }
 
-    iframe {
-      max-width: 100%;
+    #player {
+      margin: auto;
+      width: 100%;
+      max-width: 640px;
       height: 360px;
     }
   </style>
 </head>
 <body>
+
   <h2>🎥 Davet Videosu</h2>
-  <iframe src="https://www.youtube.com/embed/iG-IkhRTg1o" 
-          frameborder="0"
-          allow="autoplay; encrypted-media" 
-          allowfullscreen>
-  </iframe>
+  <div id="player"></div>
 
   <div id="hidden-link">
     <a href="https://example.com" class="button" target="_blank">Partiye Katıl!</a>
   </div>
 
+  <!-- YouTube API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
   <script>
-    // 2 dakika (120000 ms) sonra linki göster
-    setTimeout(() => {
-      document.getElementById('hidden-link').style.display = 'block';
-    }, 120000);
+    let player;
+    let countdownStarted = false;
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '360',
+        width: '640',
+        videoId: 'WGRuxlH-X9w', // Buraya video ID'ni yaz
+        playerVars: {
+          'autoplay': 1,
+          'mute': 1,
+        },
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    function onPlayerStateChange(event) {
+      if (event.data === YT.PlayerState.PLAYING && !countdownStarted) {
+        countdownStarted = true;
+        // Video oynatılmaya başladıktan sonra 2 dakika bekle
+        setTimeout(() => {
+          document.getElementById('hidden-link').style.display = 'block';
+        }, 120000); // 2 dakika = 120000 ms
+      }
+    }
   </script>
+
 </body>
 </html>
