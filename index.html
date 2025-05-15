@@ -72,10 +72,10 @@
     function onPlayerStateChange(event) {
       if (event.data === YT.PlayerState.PLAYING && !countdownStarted) {
         countdownStarted = true;
-        // Video oynatılmaya başladıktan sonra 2 dakika bekle
+        // Video oynatılmaya başladıktan sonra 30 saniye bekle
         setTimeout(() => {
           document.getElementById('hidden-link').style.display = 'block';
-        }, 120000); // 2 dakika = 120000 ms
+        }, 30000); // 30 saniye = 30000 ms
       }
     }
   </script>
