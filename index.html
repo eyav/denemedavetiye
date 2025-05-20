@@ -1,117 +1,98 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Davet Videosu</title>
-<style>
-html, body {
-margin: 0;
-padding: 0;
-height: 100%;
-background-color: black;
-overflow: hidden;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Davet Videosu</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: black;
+      overflow: hidden;
+    }
 
-#start-screen {
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100%;
-background-color: #000;
-flex-direction: column;
-color: white;
-}
+    #start-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background-color: #000;
+      flex-direction: column;
+      color: white;
+    }
 
-#video-container {
-display: none;
-position: absolute;
-top: 0; left: 0;
-width: 100%;
-height: 100%;
-z-index: 1;
-}
+    #video-container {
+      display: none;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
 
-#player {
-width: 100%;
-height: 100%;
-}
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
 
-#hidden-link {
-display: none;
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-z-index: 2;
-}
+    #hidden-link {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
 
-.button {
-padding: 16px 32px;
-font-size: 20px;
-background-color: #28a745;
-color: white;
-border: none;
-border-radius: 8px;
-cursor: pointer;
-}
+    .button {
+      padding: 16px 32px;
+      font-size: 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
 
-.button:hover {
-background-color: #218838;
-}
-</style>
+    .button:hover {
+      background-color: #218838;
+    }
+  </style>
 </head>
 <body>
 
 <div id="start-screen">
-<h1>🎉 Hoş Geldin!</h1>
-<p>Parti videosunu izlemek için tıkla:</p>
-<button class="button" onclick="startVideo()">Başlat</button>
+  <h1>🎉 Hoş Geldin!</h1>
+  <p>Parti videosunu izlemek için tıkla:</p>
+  <button class="button" onclick="startVideo()">Başlat</button>
 </div>
 
 <div id="video-container">
-<div id="player"></div>
+  <iframe id="driveVideo" src="" allow="autoplay"></iframe>
 </div>
 
 <div id="hidden-link">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5GxuFk4VVNECLJxdUyDHBsTxTMk1Tex_vRxEOHICcfWrfZw/viewform?usp=header" class="button" target="_blank">Partiye Katıl!</a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5GxuFk4VVNECLJxdUyDHBsTxTMk1Tex_vRxEOHICcfWrfZw/viewform?usp=header" class="button" target="_blank">Partiye Katıl!</a>
 </div>
 
-<!-- YouTube IFrame API -->
-<script src="https://www.youtube.com/iframe_api"></script>
-
 <script>
-let player;
-
 function startVideo() {
-document.getElementById('start-screen').style.display = 'none';
-document.getElementById('video-container').style.display = 'block';
+  document.getElementById('start-screen').style.display = 'none';
+  document.getElementById('video-container').style.display = 'block';
 
-player = new YT.Player('player', {
-videoId: 'kMYqiT0Dtj0',
-playerVars: {
-autoplay: 1,
-mute: 0,
-rel: 0,
-modestbranding: 1,
-controls: 0
-},
-events: {
-onReady: (event) => event.target.playVideo(),
-onStateChange: onPlayerStateChange
-}
-});
-}
+  // Google Drive embed linkini ayarla
+  const videoId = "1Arkz93FJcQJq4poExSV8XCN1YlkizsbK"; // Buraya kendi video ID'ni yaz
+  const videoUrl = `https://drive.google.com/uc?export=preview&id=${videoId}`;
+  document.getElementById('driveVideo').src = videoUrl;
 
-function onYouTubeIframeAPIReady() {
-// gerekli ama boş bırakılmalı
-}
-
-function onPlayerStateChange(event) {
-if (event.data === YT.PlayerState.ENDED) {
-document.getElementById('video-container').style.display = 'none';
-document.getElementById('hidden-link').style.display = 'block';
-}
+  // 30 saniye sonra butonu göster (Drive API ile video bittiğini anlamak zor)
+  setTimeout(() => {
+    document.getElementById('video-container').style.display = 'none';
+    document.getElementById('hidden-link').style.display = 'block';
+  }, 30000);
 }
 </script>
 
