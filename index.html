@@ -24,6 +24,7 @@
       text-align: center;
       padding: 0 20px;
       position: relative;
+      z-index: 1;
     }
 
     #start-screen h1 {
@@ -69,36 +70,53 @@
       background-color: #c0c0c0;
     }
 
-    /* Disko Topu */
-    #disco-ball {
+    /* Disko Topu Stili */
+    .disco-ball {
       position: absolute;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
       width: 80px;
       height: 80px;
-      background: radial-gradient(circle, #ccc 20%, #888 80%);
-      border-radius: 50%;
-      box-shadow: 0 0 10px white, 0 0 20px #aaa;
-      animation: spin 4s linear infinite, shine 2s ease-in-out infinite;
-      z-index: 1;
+      animation: spin 4s linear infinite, float 10s ease-in-out infinite alternate;
+      opacity: 0.8;
+      z-index: 0;
+    }
+
+    .disco1 {
+      top: 50px;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .disco2 {
+      top: 150px;
+      left: 70%;
+      animation-delay: 2s;
+    }
+
+    .disco3 {
+      top: 250px;
+      left: 40%;
+      animation-delay: 4s;
     }
 
     @keyframes spin {
-      from { transform: translateX(-50%) rotate(0deg); }
-      to   { transform: translateX(-50%) rotate(360deg); }
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
-    @keyframes shine {
-      0%, 100% { box-shadow: 0 0 10px white, 0 0 20px #aaa; }
-      50% { box-shadow: 0 0 20px white, 0 0 40px #fff; }
+    @keyframes float {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(20px); }
     }
   </style>
 </head>
 <body>
 
+  <!-- Disko topları -->
+  <img src="https://tse2.mm.bing.net/th/id/OIP.DWnIBS80gZ8Zst6D1j5FQgHaHa?pid=Api" class="disco-ball disco1" alt="Disko Topu">
+  <img src="https://tse1.mm.bing.net/th/id/OIP.vIjH97zQoRLSFaovnX-8yAHaLH?pid=Api" class="disco-ball disco2" alt="Disko Topu">
+  <img src="https://tse3.mm.bing.net/th/id/OIP.Nko-CV4SCH1gb8uxlZinOwHaId?pid=Api" class="disco-ball disco3" alt="Disko Topu">
+
   <div id="start-screen">
-    <div id="disco-ball"></div> <!-- Disko topu -->
     <h1>🎉 Hoş Geldin!</h1>
     <p>Parti videosunu izlemek için tıkla:</p>
     <button class="button" onclick="startVideo()">Başlat</button>
