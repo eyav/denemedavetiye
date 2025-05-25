@@ -25,6 +25,7 @@
       padding: 0 20px;
       position: relative;
       z-index: 1;
+      overflow: hidden;
     }
 
     #start-screen h1 {
@@ -75,47 +76,51 @@
       position: absolute;
       width: 80px;
       height: 80px;
-      animation: spin 4s linear infinite, float 10s ease-in-out infinite alternate;
-      opacity: 0.8;
+      animation: spin 3s linear infinite, moveXY 20s ease-in-out infinite alternate;
+      opacity: 0.9;
       z-index: 0;
+      pointer-events: none;
     }
 
     .disco1 {
-      top: 50px;
+      top: 10%;
       left: 10%;
       animation-delay: 0s;
     }
 
     .disco2 {
-      top: 150px;
+      top: 30%;
       left: 70%;
-      animation-delay: 2s;
+      animation-delay: 3s;
     }
 
     .disco3 {
-      top: 250px;
+      top: 50%;
       left: 40%;
-      animation-delay: 4s;
+      animation-delay: 5s;
     }
 
     @keyframes spin {
       from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      to   { transform: rotate(360deg); }
     }
 
-    @keyframes float {
-      0%   { transform: translateY(0); }
-      100% { transform: translateY(20px); }
+    @keyframes moveXY {
+      0%   { transform: translate(0, 0); }
+      25%  { transform: translate(20px, -10px); }
+      50%  { transform: translate(-20px, 15px); }
+      75%  { transform: translate(30px, -5px); }
+      100% { transform: translate(-10px, 20px); }
     }
   </style>
 </head>
 <body>
 
   <div id="start-screen">
-    <!-- Disko topları sadece başlangıç ekranında -->
-    <img src="https://tse2.mm.bing.net/th/id/OIP.DWnIBS80gZ8Zst6D1j5FQgHaHa?pid=Api" class="disco-ball disco1" alt="Disko Topu">
-    <img src="https://tse1.mm.bing.net/th/id/OIP.vIjH97zQoRLSFaovnX-8yAHaLH?pid=Api" class="disco-ball disco2" alt="Disko Topu">
-    <img src="https://tse3.mm.bing.net/th/id/OIP.Nko-CV4SCH1gb8uxlZinOwHaId?pid=Api" class="disco-ball disco3" alt="Disko Topu">
+    <!-- Arka planı şeffaf olan disko topu PNG görselleri -->
+    <img src="https://www.pngmart.com/files/3/Disco-Ball-PNG-Transparent-Image.png" class="disco-ball disco1" alt="Disko Topu">
+    <img src="https://www.pngmart.com/files/3/Disco-Ball-PNG-Image.png" class="disco-ball disco2" alt="Disko Topu">
+    <img src="https://www.pngmart.com/files/3/Disco-Ball-PNG-Free-Download.png" class="disco-ball disco3" alt="Disko Topu">
 
     <h1>🎉 Hoş Geldin!</h1>
     <p>Parti videosunu izlemek için tıkla:</p>
