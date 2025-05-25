@@ -23,6 +23,12 @@
       color: white;
       text-align: center;
       padding: 0 20px;
+      position: relative;
+    }
+
+    #start-screen h1 {
+      font-style: italic;
+      z-index: 2;
     }
 
     #video-container {
@@ -51,21 +57,48 @@
     .button {
       padding: 16px 32px;
       font-size: 20px;
-      background-color: #28a745;
-      color: white;
+      background-color: silver;
+      color: black;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      z-index: 2;
     }
 
     .button:hover {
-      background-color: #218838;
+      background-color: #c0c0c0;
+    }
+
+    /* Disko Topu */
+    #disco-ball {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, #ccc 20%, #888 80%);
+      border-radius: 50%;
+      box-shadow: 0 0 10px white, 0 0 20px #aaa;
+      animation: spin 4s linear infinite, shine 2s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes spin {
+      from { transform: translateX(-50%) rotate(0deg); }
+      to   { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    @keyframes shine {
+      0%, 100% { box-shadow: 0 0 10px white, 0 0 20px #aaa; }
+      50% { box-shadow: 0 0 20px white, 0 0 40px #fff; }
     }
   </style>
 </head>
 <body>
 
   <div id="start-screen">
+    <div id="disco-ball"></div> <!-- Disko topu -->
     <h1>🎉 Hoş Geldin!</h1>
     <p>Parti videosunu izlemek için tıkla:</p>
     <button class="button" onclick="startVideo()">Başlat</button>
@@ -90,14 +123,14 @@
       document.getElementById('video-container').style.display = 'block';
 
       player = new YT.Player('player', {
-        videoId: 'kMYqiT0Dtj0', // YouTube video ID
+        videoId: 'kMYqiT0Dtj0',
         playerVars: {
           autoplay: 1,
-          mute: 0, // Autoplay için mobilde sessiz başlatmak şart
+          mute: 0,
           rel: 0,
           modestbranding: 1,
           controls: 0,
-          playsinline: 1 // iOS'ta tam ekran zorlamasın diye
+          playsinline: 1
         },
         events: {
           onReady: (event) => event.target.playVideo(),
@@ -106,9 +139,7 @@
       });
     }
 
-    function onYouTubeIframeAPIReady() {
-      // Boş bırakılmalı ama API'nin yüklenmesi için gerekli
-    }
+    function onYouTubeIframeAPIReady() {}
 
     function onPlayerStateChange(event) {
       if (event.data === YT.PlayerState.ENDED) {
