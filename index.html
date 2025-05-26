@@ -29,7 +29,6 @@
 
     #overlay {
       position: absolute;
-      bottom: 90px; /* AFTER PARTY'nin hemen altı için manuel ayarlandı */
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -136,6 +135,20 @@
         document.getElementById('hidden-link').style.display = 'block';
       }
     }
+
+    // 📌 Görselin yüksekliğine göre overlay konumla
+    function positionOverlay() {
+      const img = document.getElementById('bg-image');
+      const overlay = document.getElementById('overlay');
+
+      const offsetRatio = 0.85; // AFTER PARTY yazısı civarı (~62% aşağıda)
+      const topOffset = img.clientHeight * offsetRatio;
+
+      overlay.style.top = `${topOffset}px`;
+    }
+
+    window.addEventListener('load', positionOverlay);
+    window.addEventListener('resize', positionOverlay);
   </script>
 
 </body>
