@@ -18,7 +18,10 @@
       justify-content: center;
       align-items: center;
       height: 100%;
-      background-color: #000;
+      background-image: url('arkaplan.jpg'); /* <- Görselin adı veya linki */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       flex-direction: column;
       color: white;
       text-align: center;
@@ -70,59 +73,11 @@
     .button:hover {
       background-color: #c0c0c0;
     }
-
-    /* Disko Topları */
-    .disco-ball {
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      animation: spin 3s linear infinite, moveXY 20s ease-in-out infinite alternate;
-      opacity: 0.9;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .disco1 {
-      top: 10%;
-      left: 10%;
-      animation-delay: 0s;
-    }
-
-    .disco2 {
-      top: 30%;
-      left: 70%;
-      animation-delay: 3s;
-    }
-
-    .disco3 {
-      top: 50%;
-      left: 40%;
-      animation-delay: 5s;
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-
-    @keyframes moveXY {
-      0%   { transform: translate(0, 0); }
-      25%  { transform: translate(20px, -10px); }
-      50%  { transform: translate(-20px, 15px); }
-      75%  { transform: translate(30px, -5px); }
-      100% { transform: translate(-10px, 20px); }
-    }
   </style>
 </head>
 <body>
 
   <div id="start-screen">
-    <!-- GÖMÜLÜ BASE64 DİSKO TOPLARI -->
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACNklEQVR4Xu3XQQrCMBCA4Xf//5xxR1RRGWVaI0vYfTp+6rT6c2X97T8tDcA5xwBq+A54BDnDHOEX8B7cB+8xzAq59PwIIYQQQyxxBBBLP0rfMG8Z7h6OX6dfjr9Y5tbOYPzrn1v2Pq++WT0J1DBdJ9TVtfVW/N1b2L2VNLkAwP6vCyUQQQghhBBCL4APFu9z/FzL6s4wkhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQsg3RBCKfHZDTV7UIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCHUo6AYeqK28EUhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYTQKgEHhPl0kaE24QAAAABJRU5ErkJggg==" class="disco-ball disco1" alt="Disko Topu">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAB9UlEQVR4Xu3YwW2DQAwG4Q/U/39bxLY8IRcWWUyVo6kcn23oF2ef4yAgAAAAAAAAAAALzR+9bb9Z+dAQEBAQEBAQEBAQGBPLzMZ+9BbZmaWaPjXp00DzI62YYylzOaUwWmMwWyV8HtZeyfRG+UNgFfAgVpvJ/Hl20Wgm+BX/3PtX/1U3Ra6nYfdX+bbdQvhNGfeXusj2Ad06TCHx9gL3Xt9YvTGlbZdxDG03FMEwzTDPXY6TYlVPNEVVtC1D1RW3Gz2Mz8nDsYdnYOxoaJbMn2fH41A3xtq3U38/YMp6VvWwcnrH65gE5l0x2BG3vvNN0gzxA4AObexM24zAMkNerKy8ulPOZ8eprXZrbfToI85gG/O4wNyZjOXNmUxldTh2hvmY7z4H5/9Xd7l9f1rf+5wAAAAAAAAAAABgZ/AY7OpPW5MCFEQAAAABJRU5ErkJggg==" class="disco-ball disco2" alt="Disko Topu">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACVUlEQVR4Xu2ZMU7DQAxFQ4ML0//+e8iqqpRMpUxsNgGHr7V1yBchzLrBMQAAAAAAAAAAAG1r4A6v10v3rn/f11t+Q0BAQEBAQEBAT0XdkJnhqxV3NE6zKKoVmbZVPt4UZlkr0rlV2pQllWHVUu94soT9uvz9gX1eq1uEyyn3szCqP7m+N3f+Nzq2qYqu1epUItbtxZnmZYtc1zHe1ZW1rYmQsz63vfVz2AZqcd2NflRXduNHZd+cfDHDzHQOwmw7x5W1AzOOvD8jHXGc9QeDAc+qzdY9XheFZ9/2tgZjtWprX4zBhrqOOmEXLUKus4WyW2U6ULfdgvH3md1yGsYXWyo9XZrVuXGfNx6s1CmwD0a3sFiB7cC1R++z9zWA3bttZ4dzZ5b7kctqG2Zj0jrwHhZ58ZXm2KFaMwOe77mMfXzjC+5HVV+3ow3VV8mKFaRn8sJr38zHf7VDNvrjWmp6Pb+4rfz08ttnfn/0zkr7OvAAAAAAAAAADgFv0BuG8n+L4Mo6EAAAAASUVORK5CYII=" class="disco-ball disco3" alt="Disko Topu">
-
-    <h1>🎉 Hoş Geldin!</h1>
     <p>Parti videosunu izlemek için tıkla:</p>
     <button class="button" onclick="startVideo()">Başlat</button>
   </div>
