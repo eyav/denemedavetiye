@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Davet Videosu</title>
-  <style> 
+  <style>
     html, body {
       margin: 0;
       padding: 0;
@@ -15,19 +15,18 @@
 
     #start-screen {
       background-image: url('https://raw.githubusercontent.com/eyav/denemedavetiye/main/startscreen.png');
-      background-size: cover;
+      background-size: contain;
       background-position: center center;
       background-repeat: no-repeat;
-      background-attachment: fixed;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
       height: 100vh;
       width: 100vw;
-      flex-direction: column;
       color: white;
       text-align: center;
-      padding: 0 20px;
+      padding: 40px 20px;
       position: relative;
       z-index: 1;
       overflow: hidden;
@@ -77,6 +76,7 @@
 
   <div id="start-screen">
     <p>Parti videosunu izlemek için tıkla:</p>
+    <div style="flex: 1"></div> <!-- Sayfanın altına iter -->
     <button class="button" onclick="startVideo()">Başlat</button>
   </div>
 
