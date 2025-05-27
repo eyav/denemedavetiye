@@ -72,7 +72,7 @@
     }
 
     #hidden-link {
-      display: none;
+      /* BAŞLANGIÇTA GÖRÜNMEYECEK - JS KONTROLÜNDE */
       position: absolute;
       top: 0;
       left: 0;
@@ -82,9 +82,9 @@
       background-image: url('https://raw.githubusercontent.com/eyav/denemedavetiye/main/endscreen.png');
       background-size: cover;
       background-position: center;
-      display: flex;
       align-items: center;
       justify-content: center;
+      /* ⚠️ NOT: display burada tanımlanmadı ⚠️ */
     }
   </style>
 </head>
@@ -119,7 +119,7 @@
     function startVideo() {
       document.getElementById('start-screen').style.display = 'none';
       document.getElementById('video-container').style.display = 'block';
-      document.getElementById('hidden-link').style.display = 'none'; // Endscreen başta görünmesin
+      document.getElementById('hidden-link').style.display = 'none'; // güvenli başlangıç
 
       player = new YT.Player('player', {
         videoId: 'kMYqiT0Dtj0',
@@ -141,12 +141,13 @@
     function onYouTubeIframeAPIReady() {}
 
     function onPlayerStateChange(event) {
+      const hiddenLink = document.getElementById('hidden-link');
+
       if (event.data === YT.PlayerState.ENDED) {
         document.getElementById('video-container').style.display = 'none';
-        document.getElementById('hidden-link').style.display = 'flex'; // yalnızca video bittiğinde görünür
+        hiddenLink.style.display = 'flex'; // sadece video bitince göster
       } else {
-        // Video oynarken veya başka bir durumda endscreen asla görünmesin
-        document.getElementById('hidden-link').style.display = 'none';
+        hiddenLink.style.display = 'none'; // video başlamadan önce veya sırasında gösterme
       }
     }
 
@@ -155,7 +156,7 @@
       const img = document.getElementById('bg-image');
       const overlay = document.getElementById('overlay');
 
-      const offsetRatio = 0.29; // AFTER PARTY'nin altına denk gelen oran
+      const offsetRatio = 0.29;
       const topOffset = img.clientHeight * offsetRatio;
 
       overlay.style.top = `${topOffset}px`;
