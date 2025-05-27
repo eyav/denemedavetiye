@@ -90,6 +90,7 @@
 </head>
 <body>
 
+  <!-- Başlangıç ekranı -->
   <div id="start-screen">
     <img src="https://raw.githubusercontent.com/eyav/denemedavetiye/main/startscreen.png" id="bg-image" alt="Davet Görseli">
     <div id="overlay">
@@ -98,10 +99,12 @@
     </div>
   </div>
 
+  <!-- Video oynatıcı -->
   <div id="video-container">
     <div id="player"></div>
   </div>
 
+  <!-- Video sonrası ekran (ENDSCREEN) -->
   <div id="hidden-link">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5GxuFk4VVNECLJxdUyDHBsTxTMk1Tex_vRxEOHICcfWrfZw/viewform?usp=header"
        class="button" target="_blank">Partiye Katıl!</a>
@@ -139,16 +142,16 @@
     function onPlayerStateChange(event) {
       if (event.data === YT.PlayerState.ENDED) {
         document.getElementById('video-container').style.display = 'none';
-        document.getElementById('hidden-link').style.display = 'flex'; // flex olarak ayarlı
+        document.getElementById('hidden-link').style.display = 'flex'; // sadece video bitince göster
       }
     }
 
-    // 📌 Görselin yüksekliğine göre overlay konumla
+    // Yazı ve butonun hizasını ayarla
     function positionOverlay() {
       const img = document.getElementById('bg-image');
       const overlay = document.getElementById('overlay');
 
-      const offsetRatio = 0.29; // AFTER PARTY'nin altı için oran
+      const offsetRatio = 0.29; // AFTER PARTY'nin altına denk gelen oran
       const topOffset = img.clientHeight * offsetRatio;
 
       overlay.style.top = `${topOffset}px`;
