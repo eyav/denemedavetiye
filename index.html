@@ -104,7 +104,7 @@
     <div id="player"></div>
   </div>
 
-  <!-- Video sonrası ekran (ENDSCREEN) -->
+  <!-- Video bittikten sonra çıkacak ekran -->
   <div id="hidden-link">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5GxuFk4VVNECLJxdUyDHBsTxTMk1Tex_vRxEOHICcfWrfZw/viewform?usp=header"
        class="button" target="_blank">Partiye Katıl!</a>
@@ -119,6 +119,7 @@
     function startVideo() {
       document.getElementById('start-screen').style.display = 'none';
       document.getElementById('video-container').style.display = 'block';
+      document.getElementById('hidden-link').style.display = 'none'; // Endscreen başta görünmesin
 
       player = new YT.Player('player', {
         videoId: 'kMYqiT0Dtj0',
@@ -142,11 +143,14 @@
     function onPlayerStateChange(event) {
       if (event.data === YT.PlayerState.ENDED) {
         document.getElementById('video-container').style.display = 'none';
-        document.getElementById('hidden-link').style.display = 'flex'; // sadece video bitince göster
+        document.getElementById('hidden-link').style.display = 'flex'; // yalnızca video bittiğinde görünür
+      } else {
+        // Video oynarken veya başka bir durumda endscreen asla görünmesin
+        document.getElementById('hidden-link').style.display = 'none';
       }
     }
 
-    // Yazı ve butonun hizasını ayarla
+    // Overlay konumlandır
     function positionOverlay() {
       const img = document.getElementById('bg-image');
       const overlay = document.getElementById('overlay');
