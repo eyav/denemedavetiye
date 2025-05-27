@@ -30,24 +30,26 @@
     }
 
     #button-container {
-      position: absolute;
-      bottom: 40px; /* 🔧 Butonu en alttaki yazının üzerine sabitler */
-      left: 50%;
-      transform: translateX(-50%);
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: black;
+      text-align: center;
+      padding: 20px 0;
       z-index: 2;
     }
 
     .button {
-      padding: 20px 40px;
-      font-size: 22px;
+      padding: 16px 32px;
+      font-size: 20px;
       background-color: silver;
       color: black;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
       text-decoration: none;
       font-weight: bold;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
     .button:hover {
@@ -57,11 +59,11 @@
     @media (max-width: 600px) {
       .button {
         font-size: 18px;
-        padding: 16px 32px;
+        padding: 14px 28px;
       }
 
       #button-container {
-        bottom: 20px;
+        padding: 16px 0;
       }
     }
   </style>
@@ -70,10 +72,11 @@
 
   <div id="container">
     <img src="https://raw.githubusercontent.com/eyav/denemedavetiye/refs/heads/main/endscreen1.png" id="bg-image" alt="Endscreen">
-    <div id="button-container">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5GxuFk4VVNECLJxdUyDHBsTxTMk1Tex_vRxEOHICcfWrfZw/viewform?usp=header"
-         class="button" target="_blank">Partiye Katıl!</a>
-    </div>
+  </div>
+
+  <div id="button-container">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5GxuFk4VVNECLJxdUyDHBsTxTMk1Tex_vRxEOHICcfWrfZw/viewform?usp=header"
+       class="button" target="_blank">Partiye Katılmak İçin Devam Et!</a>
   </div>
 
 </body>
