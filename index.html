@@ -86,7 +86,6 @@
   <div id="start-screen">
     <img src="https://raw.githubusercontent.com/eyav/denemedavetiye/main/startscreen.png" id="bg-image" alt="Davet Görseli">
     <div id="overlay">
-      <p class="start-text"></p>
       <button class="button" onclick="startVideo()">Başlat</button>
     </div>
   </div>
@@ -131,17 +130,15 @@
 
     function onPlayerStateChange(event) {
       if (event.data === YT.PlayerState.ENDED) {
-        // Video bittiğinde endscreen.html sayfasına yönlendir
         window.location.href = "endscreen.html";
       }
     }
 
-    // 📌 Görselin yüksekliğine göre overlay konumla
     function positionOverlay() {
       const img = document.getElementById('bg-image');
       const overlay = document.getElementById('overlay');
 
-      const offsetRatio = 0.29;
+      const offsetRatio = 0.86; // 👈 AFTER PARTY yazısının hemen altına yerleşmesi için artırıldı
       const topOffset = img.clientHeight * offsetRatio;
 
       overlay.style.top = `${topOffset}px`;
