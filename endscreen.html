@@ -10,16 +10,31 @@
       padding: 0;
       height: 100%;
       background-color: black;
+      overflow: hidden;
     }
 
-    body {
-      background-image: url('https://raw.githubusercontent.com/eyav/denemedavetiye/main/endscreen.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    #container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    #button-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
     }
 
     .button {
@@ -40,8 +55,13 @@
 </head>
 <body>
 
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5GxuFk4VVNECLJxdUyDHBsTxTMk1Tex_vRxEOHICcfWrfZw/viewform?usp=header"
-     class="button" target="_blank">Partiye Katıl!</a>
+  <div id="container">
+    <img src="https://raw.githubusercontent.com/eyav/denemedavetiye/main/endscreen.png" id="bg-image" alt="Endscreen">
+    <div id="button-container">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5GxuFk4VVNECLJxdUyDHBsTxTMk1Tex_vRxEOHICcfWrfZw/viewform?usp=header"
+         class="button" target="_blank">Partiye Katıl!</a>
+    </div>
+  </div>
 
 </body>
 </html>
