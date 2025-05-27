@@ -13,63 +13,34 @@
       overflow: hidden;
     }
 
-    /* START SCREEN */
     #start-screen {
-      position: absolute;
-      top: 0;
-      left: 0;
+      position: relative;
       width: 100vw;
       height: 100vh;
-      background-image: url('https://raw.githubusercontent.com/eyav/denemedavetiye/main/startscreen.png');
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      padding-bottom: 100px;
+      overflow: hidden;
+    }
+
+    #bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    #overlay {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: white;
       z-index: 2;
     }
 
-    #start-screen .button {
-      margin-top: 10px;
+    .start-text {
+      font-size: 20px;
+      margin-bottom: 10px;
     }
 
-    /* VIDEO CONTAINER */
-    #video-container {
-      display: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 3;
-    }
-
-    #player {
-      width: 100%;
-      height: 100%;
-    }
-
-    /* END SCREEN */
-    #hidden-link {
-      display: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-image: url('https://raw.githubusercontent.com/eyav/denemedavetiye/main/endscreen.png');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 4;
-    }
-
-    /* GENEL BUTON STİLİ */
     .button {
       padding: 16px 32px;
       font-size: 20px;
@@ -78,33 +49,52 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      z-index: 2;
     }
 
     .button:hover {
       background-color: #c0c0c0;
     }
 
-    .start-text {
-      font-size: 20px;
-      color: white;
-      margin-bottom: 10px;
+    #video-container {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #player {
+      width: 100%;
+      height: 100%;
+    }
+
+    #hidden-link {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
     }
   </style>
 </head>
 <body>
 
-  <!-- Start ekranı -->
   <div id="start-screen">
-    <p class="start-text">Parti videosunu izlemek için tıkla:</p>
-    <button class="button" onclick="startVideo()">Başlat</button>
+    <img src="https://raw.githubusercontent.com/eyav/denemedavetiye/main/startscreen.png" id="bg-image" alt="Davet Görseli">
+    <div id="overlay">
+      <p class="start-text">Parti videosunu izlemek için tıkla:</p>
+      <button class="button" onclick="startVideo()">Başlat</button>
+    </div>
   </div>
 
-  <!-- Video oynatıcı -->
   <div id="video-container">
     <div id="player"></div>
   </div>
 
-  <!-- Video sonrası endscreen -->
   <div id="hidden-link">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5GxuFk4VVNECLJxdUyDHBsTxTMk1Tex_vRxEOHICcfWrfZw/viewform?usp=header"
        class="button" target="_blank">Partiye Katıl!</a>
@@ -117,10 +107,8 @@
     let player;
 
     function startVideo() {
-      // Start ekranını kaldır, video alanını göster
       document.getElementById('start-screen').style.display = 'none';
       document.getElementById('video-container').style.display = 'block';
-      document.getElementById('hidden-link').style.display = 'none'; // Güvenlik önlemi
 
       player = new YT.Player('player', {
         videoId: 'kMYqiT0Dtj0',
@@ -142,16 +130,25 @@
     function onYouTubeIframeAPIReady() {}
 
     function onPlayerStateChange(event) {
-      const videoContainer = document.getElementById('video-container');
-      const hiddenLink = document.getElementById('hidden-link');
-
       if (event.data === YT.PlayerState.ENDED) {
-        videoContainer.style.display = 'none';
-        hiddenLink.style.display = 'flex'; // sadece video bitince
-      } else if (event.data === YT.PlayerState.PLAYING) {
-        hiddenLink.style.display = 'none';
+        // Video bittiğinde endscreen.html sayfasına yönlendir
+        window.location.href = "endscreen.html";
       }
     }
+
+    // 📌 Görselin yüksekliğine göre overlay konumla
+    function positionOverlay() {
+      const img = document.getElementById('bg-image');
+      const overlay = document.getElementById('overlay');
+
+      const offsetRatio = 0.29;
+      const topOffset = img.clientHeight * offsetRatio;
+
+      overlay.style.top = `${topOffset}px`;
+    }
+
+    window.addEventListener('load', positionOverlay);
+    window.addEventListener('resize', positionOverlay);
   </script>
 
 </body>
