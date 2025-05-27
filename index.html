@@ -74,10 +74,17 @@
     #hidden-link {
       display: none;
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: 2;
+      background-image: url('https://raw.githubusercontent.com/eyav/denemedavetiye/main/endscreen.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
@@ -132,7 +139,7 @@
     function onPlayerStateChange(event) {
       if (event.data === YT.PlayerState.ENDED) {
         document.getElementById('video-container').style.display = 'none';
-        document.getElementById('hidden-link').style.display = 'block';
+        document.getElementById('hidden-link').style.display = 'flex'; // flex olarak ayarlı
       }
     }
 
@@ -141,7 +148,7 @@
       const img = document.getElementById('bg-image');
       const overlay = document.getElementById('overlay');
 
-      const offsetRatio = 0.29; // AFTER PARTY yazısı civarı (~62% aşağıda)
+      const offsetRatio = 0.29; // AFTER PARTY'nin altı için oran
       const topOffset = img.clientHeight * offsetRatio;
 
       overlay.style.top = `${topOffset}px`;
